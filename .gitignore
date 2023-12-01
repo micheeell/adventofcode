@@ -1,0 +1,13 @@
+# Ignore everything
+*
+
+# But not the following files
+!.gitignore
+!README.md
+!2023/
+!2023/template_start.php
+!2023/template_exit.php
+!2023/day-1.md
+!2023/day-1.part1.php
+!2023/day-1.part2.php
+
