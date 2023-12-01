@@ -10,5 +10,7 @@ Please refer to the last commit date.
 
 ## @Todo
 - [ ] Add a [changelog](./CHANGELOG.md)
+- [ ] Refactor in [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming)
+- [ ] Make the `--help` command customizable according to script
 - [ ] Add tests using daily example and expected results
 - [ ] Fetch puzzle input automatically with API calls

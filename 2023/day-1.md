@@ -5,7 +5,9 @@
 ### Instructions
 
 1. Download your puzzle input and save it as `day-1.txt` in this folder.
-2. 
+2. run `php -f day-1.part1.php -- -v -t` to check sample data is processed correctly
+3. run `php -f day-1.part1.php` to get the answer based on your input
+4. Same for second part: `php -f day-1.part2.php -- -v -t` will check sample data is processed correctly and `php -f day-1.part2.php` will give you the answer you're looking for.
 
 
 ### --- Part 1 ---
