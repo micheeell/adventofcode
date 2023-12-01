@@ -13,7 +13,7 @@ STR
 
 function getFirstDigit($str)
 {
-    // regex is: "the first digit after all non-digit starting characters"
+    // regex is: "from the beginning of the string, skip the non-digit characters and get the first digit you find"
     if (!preg_match('/^[\D]*(\d)/', $str, $matches)) {
         if (VERBOSE) {
             echo 'Error in string: no match found for ' . __METHOD__ . PHP_EOL;
@@ -26,7 +26,7 @@ function getFirstDigit($str)
 
 function getLastDigit($str)
 {
-    // regex is: "the last digit before all non-digit ttrailing characters"
+    // regex is: "get a unique digit that is only followed by non-digit characters until the end of the string"
     if (!preg_match('/(\d)[\D]*$/', $str, $matches)) {
         if (VERBOSE) {
             echo 'Error in string: no match found for ' . __METHOD__ . PHP_EOL;

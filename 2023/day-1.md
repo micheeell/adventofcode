@@ -1,14 +1,11 @@
 ## Day 1: Trebuchet?!
 
+* [Problem - Part 1](#----part-1----)
+* [Problem - Part 2](#----part-two----)
+* [Instructions](#instructions)
+* [See Also](#see-also)
+
 *[link to Day 1: Trebuchet?!](https://adventofcode.com/2023/day/1)*
-
-### Instructions
-
-1. Download your puzzle input and save it as `day-1.txt` in this folder.
-2. run `php -f day-1.part1.php -- -v -t` to check sample data is processed correctly
-3. run `php -f day-1.part1.php` to get the answer based on your input
-4. Same for second part: `php -f day-1.part2.php -- -v -t` will check sample data is processed correctly and `php -f day-1.part2.php` will give you the answer you're looking for.
-
 
 ### --- Part 1 ---
 
@@ -56,3 +53,20 @@ zoneight234
 In this example, the calibration values are `29`, `83`, `13`, `24`, `42`, `14`, and `76`. Adding these together produces `281`.
 
 What is the sum of all of the calibration values?
+
+### Instructions
+
+1. Download [your puzzle input](https://adventofcode.com/2023/day/1/input) and save it as `day-1.txt` in this folder.
+2. run `php -f day-1.part1.php -- -v -t` to check sample data is processed correctly
+3. run `php -f day-1.part1.php` to get the answer based on your input
+4. Same for second part:
+    * `php -f day-1.part2.php -- -v -t` will check sample data is processed correctly
+    * and `php -f day-1.part2.php` will give you the answer you're looking for.
+
+### See also
+
+Related topics:
+* [PHP from the command line](https://www.php.net/manual/en/features.commandline.php)
+* [Regex crossword](https://regexcrossword.com/)
+* [Markdown Guide](https://www.markdownguide.org/cheat-sheet/)
+* [Trebuchet in xkcd](https://xkcd.com/382/)

@@ -1,9 +1,13 @@
 # ADVENT OF CODE
 
 ## Presentation
-This is my personnal repository for adventofcode solutions.
+This is my personal repository for AdventOfCode solutions.
 It is *very likely* that this repo is NOT up-to-date when you read these lines.
 Please refer to the last commit date.
+
+### Puzzles
+* 2023
+    * [Day 1](2023/day-1.md)
 
 ## Links:
 * [official site](https://adventofcode.com/)
