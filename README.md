@@ -8,6 +8,7 @@ Please refer to the last commit date.
 ### Puzzles
 * 2023
     * [Day 1](2023/day-1.md)
+    * [Day 2](2023/day-2.md)
 
 ## Links:
 * [official site](https://adventofcode.com/)
@@ -16,5 +17,7 @@ Please refer to the last commit date.
 - [ ] Add a [changelog](./CHANGELOG.md)
 - [ ] Refactor in [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming)
 - [ ] Make the `--help` command customizable according to script
+- [ ] Make an index file
+- [ ] Do it for previous years [2015](https://adventofcode.com/2015/)[-](https://adventofcode.com/2020)[2022](https://adventofcode.com/2022)
 - [ ] Add tests using daily example and expected results
 - [ ] Fetch puzzle input automatically with API calls
