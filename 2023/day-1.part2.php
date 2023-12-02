@@ -25,7 +25,8 @@ const INTEGER_ARR = [
     'eight' => 8,
     'nine' => 9
 ];
-function getFirstDigit($str)
+
+function getFirstDigit($str): false|int
 {
     // regex is: "find one of those (digit or word), no matter what lies after"
     if (!preg_match('/(\d|(one|two|three|four|five|six|seven|eight|nine)).*$/', $str, $matches)) {
@@ -42,7 +43,7 @@ function getFirstDigit($str)
     return INTEGER_ARR[$matches[1]];
 }
 
-function getLastDigit($str)
+function getLastDigit($str): false|int
 {
     // regex is: "find one of those (digit or word), no matter what you may encounter before"
     if (!preg_match('/^.*(\d|(one|two|three|four|five|six|seven|eight|nine))/', $str, $matches)) {

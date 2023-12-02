@@ -11,7 +11,7 @@ treb7uchet
 STR
 : file_get_contents(__DIR__ . DIRECTORY_SEPARATOR . 'day-1.txt');
 
-function getFirstDigit($str)
+function getFirstDigit($str): false|string
 {
     // regex is: "from the beginning of the string, skip the non-digit characters and get the first digit you find"
     if (!preg_match('/^[\D]*(\d)/', $str, $matches)) {
@@ -24,7 +24,7 @@ function getFirstDigit($str)
     return $matches[1];
 }
 
-function getLastDigit($str)
+function getLastDigit($str): false|string
 {
     // regex is: "get a unique digit that is only followed by non-digit characters until the end of the string"
     if (!preg_match('/(\d)[\D]*$/', $str, $matches)) {
