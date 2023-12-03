@@ -5,7 +5,7 @@
 * [Instructions](#instructions)
 * [See Also](#see-also)
 
-*[link to Day](https://adventofcode.com/2023/day/2)*
+*[link to Day 2: Cube Conundrum](https://adventofcode.com/2023/day/2)*
 
 ### Part 1
 
@@ -69,9 +69,10 @@ For each game, find the minimum set of cubes that must have been present. **What
 
 ### Instructions
 
-1. Download [your puzzle input](https://adventofcode.com/2023/day//input) and save it as `input.txt` in this folder.
-2. run `php -f day-template.php -- -v -t` to check sample data is processed correctly
-3. run `php -f day-template.php` to get the answer based on your input
+1. Download [your puzzle input](https://adventofcode.com/2023/day/2/input) and save it as `day-2.txt` in this folder.
+2. run `php -f day-2.part1.php -- -v -t` to check sample data is processed correctly
+3. run `php -f day-2.part1.php` to get the answer based on your input
+3. run `php -f day-2.part2.php` to get the answer for part 2
 
 ### See also
 
