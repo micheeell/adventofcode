@@ -12,6 +12,7 @@ Please refer to the last commit date.
     * [Day 1](2023/day-1.md)
     * [Day 2](2023/day-2.md)
     * [Day 3](2023/day-3.md)
+    * [Day 4](2023/day-4.md)
 
 ## Links:
 
@@ -22,6 +23,7 @@ Please refer to the last commit date.
 - [ ] Add a [changelog](./CHANGELOG.md)
 - [ ] Refactor in [OOP](https://en.wikipedia.org/wiki/Object-oriented_programming)
 - [ ] Make the `--help` command customizable according to script
+- [ ] Make `--debug` option dynamic (param) so that one can debug specific step
 - [ ] Make an index file
 - [ ] Do it for previous
   years [2015](https://adventofcode.com/2015/)[-](https://adventofcode.com/2020)[2022](https://adventofcode.com/2022)

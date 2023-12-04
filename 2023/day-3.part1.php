@@ -79,7 +79,7 @@ function isAdjacent($number, $lineIndex, $symbols): bool
 {
 	$start = $number['start'] > 0 ? $number['start'] - 1 : 0;
 	$end = $number['end'];
-	if ($lineIndex == 102) {
+	if (DEBUG_MODE && $lineIndex == 102) {
 		echo ' number: ' . $number['value'] . PHP_EOL
 			. '  first: ' . $number['start'] . PHP_EOL
 			. '  start: ' . $start . PHP_EOL
