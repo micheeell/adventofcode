@@ -44,6 +44,7 @@ if (VERBOSE) {
 	echo 'starting...'
 		. PHP_EOL . sprintf("%20s %s", 'verbose mode is:', 'ON')
 		. PHP_EOL . sprintf("%20s %s", 'test mode is:', (TEST_MODE ? 'ON' : 'off'))
+		. PHP_EOL . sprintf("%20s %s", 'debug mode is:', (DEBUG_MODE ? 'ON' : 'off'))
 		. PHP_EOL;
 	if (SILENT) {
 		die(

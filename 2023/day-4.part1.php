@@ -26,7 +26,7 @@ function parseInput($fileContent): array
 			'winningNumbers' => $winningNumbers,
 			'numbers' => $numbers,
 		];
-		if (VERBOSE) {
+		if (VERBOSE && DEBUG_MODE) {
 			echo 'ScratchCard #' . $cardId . PHP_EOL . 'winnings: ' . count($winningNumbers)
 				. PHP_EOL . 'numbers: ' . count($numbers) . PHP_EOL;
 		}
@@ -64,7 +64,7 @@ function parseLine($line): array
 			$numbersArray[] = (int)$number;
 		}
 	}
-	if (VERBOSE) {
+	if (VERBOSE && DEBUG_MODE) {
 		echo 'Card #' . $cardId . PHP_EOL . 'with winning nb: ' . $winningString . ' (' . count($winningArray) . ')'
 			. PHP_EOL . 'numbers ' . $numbersString . ' (' . count($numbersArray) . ')' . PHP_EOL;
 	}
@@ -100,7 +100,7 @@ $sum = 0;
 foreach ($parsed as $cardId => $scratchCard) {
 	$score = computeScore($scratchCard);
 	$sum += $score;
-	if (VERBOSE) {
+	if (VERBOSE && DEBUG_MODE) {
 		echo 'Card #' . $cardId . ' is worth ' . $score . ' points.'
 			. PHP_EOL . 'Partial sum is ' . $sum . PHP_EOL;
 	}

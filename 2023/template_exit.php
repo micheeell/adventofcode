@@ -1,4 +1,5 @@
 <?php
+
 global $start;
 
 // End clock time in seconds
@@ -15,7 +16,7 @@ if ($execution < .0005) {
 	$timeUnit = 'ms';
 }
 
-if (VERBOSE) {
+if (VERBOSE || DEBUG_MODE) {
 	echo sprintf("...exiting after %.2f %s", $execution, $timeUnit) . PHP_EOL;
 } elseif (!SILENT) {
 	echo 'the end' . PHP_EOL;

@@ -26,7 +26,7 @@ function parseInput($fileContent): array
 			'winningNumbers' => $winningNumbers,
 			'numbers' => $numbers,
 		];
-		if (VERBOSE) {
+		if (DEBUG_MODE && VERBOSE) {
 			echo 'ScratchCard #' . $cardId . PHP_EOL . 'winnings: ' . count($winningNumbers)
 				. PHP_EOL . 'numbers: ' . count($numbers) . PHP_EOL;
 		}
@@ -115,7 +115,7 @@ $stack = parseInput($input);
 
 $pileResult = play($stack);
 $sum = array_sum($pileResult);
-if (TEST_MODE && VERBOSE) {
+if (TEST_MODE && (VERBOSE || DEBUG_MODE)) {
 	echo 'Result: ' . var_export($pileResult, true) . PHP_EOL;
 }
 
