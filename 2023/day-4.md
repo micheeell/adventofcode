@@ -1,4 +1,4 @@
-## Day 1: Trebuchet?!
+## Day 4: Scratchcards
 
 * [Problem - Part 1](#part-1)
 * [Problem - Part 2](#part-two)
@@ -8,8 +8,6 @@
 *[link to Day 4: Scratchcards](https://adventofcode.com/2023/day/4)*
 
 ### Part 1
-
---- Day 4: Scratchcards ---
 
 The gondola takes you up. Strangely, though, the ground doesn't seem to be coming with you; you're not climbing a
 mountain. As the circle of Snow Island recedes below you, an entire new landmass suddenly appears above you! The gondola
