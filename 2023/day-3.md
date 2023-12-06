@@ -1,7 +1,7 @@
 ## Day 3: Gear Ratios
 
 * [Problem - Part 1](#part-1)
-* [Problem - Part 2](#part-two)
+* [Problem - Part 2](#part-2)
 * [Instructions](#instructions)
 * [See Also](#see-also)
 

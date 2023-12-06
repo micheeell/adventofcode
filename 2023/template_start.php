@@ -37,8 +37,8 @@ if (isset($options["h"]) || isset($options["help"])) {
 define('VERBOSE', (isset($options["v"]) || isset($options["verbose"])));
 define('TEST_MODE', (isset($options["t"]) || isset($options["test"])));
 define('SILENT', (isset($options["s"]) || isset($options["silent"])));
-$debug = $options["d"] ?? ($options["debug"] ?? false);
-define('DEBUG_MODE', $debug);
+// $debug = $options["d"] ?? ($options["debug"] ?? false);
+define('DEBUG_MODE', (isset($options["d"]) || isset($options["debug"])));
 
 if (VERBOSE) {
 	echo 'starting...'

@@ -83,7 +83,7 @@ function getMinimumSet($gameSubset): array
 	return $fewest;
 }
 
-function computePower($minimumSet)
+function computePower($minimumSet): int
 {
 	return $minimumSet['red'] * $minimumSet['green'] * $minimumSet['blue'];
 }

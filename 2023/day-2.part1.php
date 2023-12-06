@@ -80,7 +80,7 @@ function isPossible($game): bool
 		}
 	}
 
-	if (VERBOSE) {
+	if (DEBUG_MODE) {
 		echo 'game ' . $game['ID'] . ' is possible.' . PHP_EOL;
 	}
 
@@ -94,7 +94,7 @@ foreach (explode("\n", $input) as $k => $line) {
 	if ($isPossible) {
 		$sum += $game['ID'];
 	}
-	if (VERBOSE) {
+	if (VERBOSE || DEBUG_MODE) {
 		echo 'game #' . $game['ID'] . ' - ' . ($isPossible ? 'Possible' : 'Impossible') . ' L.' . __LINE__
 			. PHP_EOL . 'sum : ' . $sum . PHP_EOL;
 	}
