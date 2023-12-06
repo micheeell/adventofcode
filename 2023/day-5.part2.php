@@ -169,7 +169,9 @@ function applyTranslation($segments, $from, $to, $move): array
 	$unmappedSegments = [];
 	foreach ($segments as $segment) {
 		[$segmentStart, $segmentEnd] = $segment;
-		echo 'apply translation: ' . $from . '-' . $to . ' -> ' . ($move > 0 ? '+' : '') . $move . PHP_EOL;
+		if (VERBOSE && DEBUG_MODE) {
+			echo 'apply translation: ' . $from . '-' . $to . ' -> ' . ($move > 0 ? '+' : '') . $move . PHP_EOL;
+		}
 		// segment ends after translation starts and segment starts before the translation begins
 		if ($segmentEnd >= $from && $segmentStart <= $to) {
 			// 1. segment is included in translation
@@ -198,17 +200,19 @@ function applyTranslation($segments, $from, $to, $move): array
 					$from + $move,
 					$segmentEnd + $move
 				];
-				if ((
-						computeSegmentLength($newSegment1) + computeSegmentLength($newSegment2)
-					) !== computeSegmentLength($segment)) {
-					if (!SILENT) {
-						echo 'ERROR: invalid translation: [' . $segmentStart . ', ' . $segmentEnd . '] > [' . $newSegment1[0] . ',' . $newSegment1[1] . '] U [' . $newSegment2[0] . ',' . $newSegment2[1] . '] U [' . PHP_EOL;
-					}
-				}
 				if ($ultraVerbose) {
 					echo '2) before: [' . $segmentStart . ',' . $segmentEnd . ']' . PHP_EOL
 						. 'mapped 1: [' . $newSegment1[0] . ',' . $newSegment1[1] . ']' . PHP_EOL
 						. 'mapped 2: [' . $newSegment2[0] . ',' . $newSegment2[1] . ']' . PHP_EOL;
+				}
+				if ((
+						computeSegmentLength($newSegment1) + computeSegmentLength($newSegment2)
+					) !== computeSegmentLength($segment)) {
+					if (!SILENT) {
+						echo 'ERROR: invalid translation: [' . $segmentStart . ', ' . $segmentEnd . ']'
+							. ' > [' . $newSegment1[0] . ',' . $newSegment1[1] . ']'
+							. ' U [' . $newSegment2[0] . ',' . $newSegment2[1] . ']' . PHP_EOL;
+					}
 				}
 				$unmappedSegments[] = $newSegment1;
 				$mappedSegments[] = $newSegment2;
@@ -219,17 +223,19 @@ function applyTranslation($segments, $from, $to, $move): array
 					$to + $move
 				];
 				$newSegment2 = [$to + 1, $segmentEnd];
-				if (computeSegmentLength($newSegment1) + computeSegmentLength(
-						$newSegment2
-					) !== computeSegmentLength($segment)) {
-					if (!SILENT) {
-						echo 'ERROR: invalid translation: [' . $segmentStart . ', ' . $segmentEnd . '] > [' . $newSegment1[0] . ',' . $newSegment1[1] . '] U [' . $newSegment2[0] . ',' . $newSegment2[1] . ']' . PHP_EOL;
-					}
-				}
 				if ($ultraVerbose) {
 					echo '3) after: [' . $segmentStart . ',' . $segmentEnd . ']' . PHP_EOL
 						. 'mapped 1: [' . $newSegment1[0] . ',' . $newSegment1[1] . ']' . PHP_EOL
 						. 'mapped 2: [' . $newSegment2[0] . ',' . $newSegment2[1] . ']' . PHP_EOL;
+				}
+				if ((
+						computeSegmentLength($newSegment1) + computeSegmentLength($newSegment2)
+					) !== computeSegmentLength($segment)) {
+					if (!SILENT) {
+						echo 'ERROR: invalid translation: [' . $segmentStart . ', ' . $segmentEnd . ']'
+							. ' > [' . $newSegment1[0] . ',' . $newSegment1[1] . ']'
+							. ' U [' . $newSegment2[0] . ',' . $newSegment2[1] . ']' . PHP_EOL;
+					}
 				}
 				$mappedSegments[] = $newSegment1;
 				$unmappedSegments[] = $newSegment2;
@@ -241,6 +247,12 @@ function applyTranslation($segments, $from, $to, $move): array
 					$to + $move
 				];
 				$newSegment3 = [$to + 1, $segmentEnd];
+				if ($ultraVerbose) {
+					echo '4) includes: [' . $segmentStart . ',' . $segmentEnd . ']' . PHP_EOL
+						. 'mapped 1: [' . $newSegment1[0] . ',' . $newSegment1[1] . ']' . PHP_EOL
+						. 'mapped 2: [' . $newSegment2[0] . ',' . $newSegment2[1] . ']' . PHP_EOL
+						. 'mapped 3: [' . $newSegment3[0] . ',' . $newSegment3[1] . ']' . PHP_EOL;
+				}
 				if (
 					(
 						computeSegmentLength($newSegment1)
@@ -248,14 +260,11 @@ function applyTranslation($segments, $from, $to, $move): array
 						+ computeSegmentLength($newSegment3)
 					) !== computeSegmentLength($segment)) {
 					if (!SILENT) {
-						echo 'ERROR: invalid translation: [' . $segmentStart . ', ' . $segmentEnd . '] > [' . $newSegment1[0] . ',' . $newSegment1[1] . '] U [' . $newSegment2[0] . ',' . $newSegment2[1] . '] U [' . $newSegment3[0] . ',' . $newSegment3[1] . ']' . PHP_EOL;
+						echo 'ERROR: invalid translation: [' . $segmentStart . ', ' . $segmentEnd . ']'
+							. ' > [' . $newSegment1[0] . ',' . $newSegment1[1] . ']'
+							. ' U [' . $newSegment2[0] . ',' . $newSegment2[1] . ']'
+							. ' U [' . $newSegment3[0] . ',' . $newSegment3[1] . ']' . PHP_EOL;
 					}
-				}
-				if ($ultraVerbose) {
-					echo '4) includes: [' . $segmentStart . ',' . $segmentEnd . ']' . PHP_EOL
-						. 'mapped 1: [' . $newSegment1[0] . ',' . $newSegment1[1] . ']' . PHP_EOL
-						. 'mapped 2: [' . $newSegment2[0] . ',' . $newSegment2[1] . ']' . PHP_EOL
-						. 'mapped 3: [' . $newSegment3[0] . ',' . $newSegment3[1] . ']' . PHP_EOL;
 				}
 				$unmappedSegments[] = $newSegment1;
 				$mappedSegments[] = $newSegment2;
@@ -285,15 +294,16 @@ function getMappedSegments($segments, $map): array
 	foreach ($segments as $segment) {
 		// for each segment
 		$translatingSegments = [$segment];
-		// apply single translation
+		// apply each translation
 		foreach ($map['map'] as $translation) {
-			// but each time only on the unmapped segments left by previous translation
+			// each single translation should be applied only on the unmapped segments left by previous translation
 			$newSegments = applyTranslation(
 				$translatingSegments,
 				$translation['from'],
 				$translation['to'],
 				$translation['move']
 			);
+			// save the mapped segments
 			foreach ($newSegments['mapped'] as $newMappedSegment) {
 				$mappedResult[] = $newMappedSegment;
 			}
@@ -306,6 +316,7 @@ function getMappedSegments($segments, $map): array
 				dumpSegments($translatingSegments);
 			}
 		}
+		// remaining unmapped segments now must be considered as mapped
 		foreach ($translatingSegments as $unmapped) {
 			$mappedResult[] = $unmapped;
 		}
@@ -409,7 +420,6 @@ foreach ($blocks as $block) {
 	$maps[] = parseMaps(trim($block));
 }
 
-$location = [];
 $location = getLocationSegmentsFromSeedSegments($seeds, $maps);
 if (TEST_MODE && (VERBOSE || DEBUG_MODE)) {
 	echo 'computed location segment: ' . var_export($location, true) . PHP_EOL;
