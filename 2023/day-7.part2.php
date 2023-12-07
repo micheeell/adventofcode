@@ -14,6 +14,7 @@ STR
 
 // remove leading and trailing spaces or blank lines
 $input = trim($input);
+
 const CARDS = ['A', 'K', 'Q', 'T', '9', '8', '7', '6', '5', '4', '3', '2', 'J'];
 
 const CARD_JOKER = 'J';
@@ -34,6 +35,7 @@ const TYPES = [
 	'High card'
 	//where all cards' labels are distinct: 23456
 ];
+
 const TYPE_FIVE_OF_A_KIND = 0;
 const TYPE_FOUR_OF_A_KIND = 1;
 const TYPE_FULL_HOUSE = 2;
@@ -98,11 +100,14 @@ function isFiveOfAKind($cards): bool
 			// jokers don't count
 			continue;
 		}
+
 		if ($kind === false) {
 			$kind = $card;
 			continue;
 		}
+
 		if ($card !== $kind) {
+			// another kind of card? then it's not "5 of a kind"
 			return false;
 		}
 	}
@@ -213,21 +218,16 @@ function isThreeOfAKind($cards): bool
 				// found 3 of a kind!
 				return true;
 			}
+
 			continue;
 		}
 
 		// not the first card of its kind
 		if ($card == CARD_JOKER) {
-			// another joker. increment all other cards by one (including joker)
-			foreach ($kinds as $_card => $_repeats) {
-				$kinds[$_card]++;
-				if ($kinds[$_card] > 2) {
-					// found 3 of a kind!
-					return true;
-				}
-			}
-			continue;
+			// another joker. 2 jokers ensure that there will AT LEAST be a "3 of a kind"
+			return true;
 		}
+
 		// not a joker
 		$kinds[$card]++;
 		if ($kinds[$card] > 2) {
@@ -249,19 +249,23 @@ function isTwoPair($cards): bool
 				// if there was already a pair, then a joker can be associated to any other single card to make a new pair
 				return true;
 			}
+
 			$firstPair = true;
 			continue;
 		}
+
 		if (!in_array($card, $kinds)) {
 			// new kind of card: add it
 			$kinds[] = $card;
 			continue;
 		}
+
 		// card type was already included!
 		if ($firstPair) {
 			// if it's not the first time, then it's a new pair:
 			return true;
 		}
+
 		// now there will be a pair. keep looking (for the 2nd pair)
 		$firstPair = true;
 	}
@@ -277,10 +281,12 @@ function isOnePair($cards): bool
 			// a joker can be associated to any other single card to make a pair
 			return true;
 		}
+
 		if (in_array($card, $kinds)) {
 			// same card was already included => that's a pair
 			return true;
 		}
+
 		$kinds[] = $card;
 	}
 
@@ -299,9 +305,10 @@ function isOnePair($cards): bool
 function compareHands($hand1, $hand2): int
 {
 	if ($hand1['type'] != $hand2['type']) {
-		// lowest type means strongest type
+		// lowest type means strongest hand
 		return ($hand1['type'] < $hand2['type']) ? 1 : -1;
 	}
+
 	for ($i = 1; $i <= 5; $i++) {
 		$card1 = $hand1['cards'][$i - 1];
 		$card2 = $hand2['cards'][$i - 1];
@@ -311,6 +318,7 @@ function compareHands($hand1, $hand2): int
 				? 1 : -1;
 		}
 	}
+
 	if (!SILENT) {
 		echo 'ERROR: hands are identical' . PHP_EOL;
 		dumpHand($hand1);
@@ -361,6 +369,7 @@ foreach ($list as $rank => $hand) {
 		echo 'RANKED HANDS: ' . $rank + 1 . PHP_EOL;
 		dumpHand($hand);
 	}
+
 	$answer += ($rank + 1) * $hand['bid'];
 }
 
