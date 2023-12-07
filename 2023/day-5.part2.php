@@ -93,32 +93,21 @@ function rearrangeSegments($segments): array
 	$rearranged = [];
 	$lastEnding = false;
 	foreach ($segments as $segment) {
-		if ($lastEnding === false || $segment[0] > $lastEnding) {
+		if ($lastEnding === false || $segment[0] > ($lastEnding + 1)) { // if $segment[0] == ($lastEnding + 1), it can be appended to last segment
 			// new segment is disjoint from previous: add it to the list
 			$rearranged[] = $segment;
 			$lastEnding = $segment[1];
 		} else {
-			// merge new segment by changing ending
+			// merge new segment to last segment by changing ending
 			if ($segment[1] > $lastEnding) {
 				$rearranged[count($rearranged) - 1][1] = $segment[1];
 				$lastEnding = $segment[1];
 			}
+			// if $segment[1] <= $lastEnding, there's nothing to do: it was already contained in last segment
 		}
 	}
 
 	return $rearranged;
-}
-
-function getRange($input): int
-{
-	$max = 0;
-	foreach (explode("\n", $input) as $line) {
-		if (preg_match('/^(\d+)\s+(\d+)\s+(\d+)$/', $line, $matches)) {
-			$max = max([$max, (int)$matches[1] + (int)$matches[3], (int)$matches[2] + (int)$matches[3]]);
-		}
-	}
-
-	return $max;
 }
 
 function parseMaps($block): false|array
@@ -153,8 +142,8 @@ function parseMaps($block): false|array
 		}
 		// $map['map'][] = ['orig' => (int)$matches[2], 'range' => (int)$matches[3], 'target' => (int)$matches[1]];
 		$map['map'][] = [
-			'from' => (int)$matches[2],
-			'to' => (int)$matches[2] + (int)$matches[3] - 1,
+			'open' => (int)$matches[2],
+			'close' => (int)$matches[2] + (int)$matches[3] - 1,
 			'move' => (int)$matches[1] - (int)$matches[2]
 		];
 	}
@@ -172,7 +161,7 @@ function applyTranslation($segments, $from, $to, $move): array
 		if (VERBOSE && DEBUG_MODE) {
 			echo 'apply translation: ' . $from . '-' . $to . ' -> ' . ($move > 0 ? '+' : '') . $move . PHP_EOL;
 		}
-		// segment ends after translation starts and segment starts before the translation begins
+		// segment ends after translation opens and segment starts before the translation closes
 		if ($segmentEnd >= $from && $segmentStart <= $to) {
 			// 1. segment is included in translation
 			if ($segmentStart >= $from && $segmentEnd <= $to) {
@@ -186,7 +175,8 @@ function applyTranslation($segments, $from, $to, $move): array
 				}
 				if (computeSegmentLength($newSegment) !== computeSegmentLength($segment)) {
 					if (!SILENT) {
-						echo 'ERROR: invalid translation: [' . $segmentStart . ', ' . $segmentEnd . '] > [' . $newSegment[0] . ',' . $newSegment[1] . ']' . PHP_EOL;
+						echo 'ERROR: invalid translation: [' . $segmentStart . ', ' . $segmentEnd . ']' .
+							' > [' . $newSegment[0] . ',' . $newSegment[1] . ']' . PHP_EOL;
 					}
 				}
 				$mappedSegments[] = $newSegment;
@@ -299,8 +289,8 @@ function getMappedSegments($segments, $map): array
 			// each single translation should be applied only on the unmapped segments left by previous translation
 			$newSegments = applyTranslation(
 				$translatingSegments,
-				$translation['from'],
-				$translation['to'],
+				$translation['open'],
+				$translation['close'],
 				$translation['move']
 			);
 			// save the mapped segments
@@ -331,6 +321,7 @@ function computeSegmentLength($segment): int
 		if (!SILENT) {
 			echo 'ERROR: invalid segment: [' . $segment[0] . ', ' . $segment[1] . ']' . PHP_EOL;
 		}
+
 		return false;
 	}
 
@@ -343,6 +334,7 @@ function computeTotalLength($segments): int
 	foreach ($segments as $segment) {
 		$totalLength += computeSegmentLength($segment);
 	}
+
 	return $totalLength;
 }
 
@@ -355,6 +347,7 @@ function getMap($source, $dest, $maps): false|array
 					echo 'ERROR: Incorrect map request:' . PHP_EOL
 						. $dest . ' can only be mapped from ' . $_map['source'] . ' (' . $source . ' requested)' . PHP_EOL;
 				}
+
 				return false;
 			}
 
@@ -386,8 +379,12 @@ function getLocationSegmentsFromSeedSegments($seedSegments, $maps): array
 	}
 	foreach (MAPPINGS as $source => $dest) {
 		if (VERBOSE && DEBUG_MODE) {
-			echo 'Apply: ' . $source . ' --> ' . $dest . PHP_EOL
-				. 'total segments: ' . count($mappedSegments) . PHP_EOL;
+			$title = 'Apply: ' . $source . ' --> ' . $dest;
+			echo '/**' . str_repeat('*', strlen($title)) . '**' . PHP_EOL
+				. ' * ' . $title . ' *' . PHP_EOL
+				. ' **' . str_repeat('*', strlen($title)) . '**/' . PHP_EOL
+				. 'total segments: ' . count($mappedSegments) . PHP_EOL
+				. '  total length: ' . computeTotalLength($mappedSegments) . PHP_EOL;
 		}
 
 		$mappedSegments = getMappedSegments($mappedSegments, getMap($source, $dest, $maps));
@@ -401,9 +398,6 @@ function getLocationSegmentsFromSeedSegments($seedSegments, $maps): array
 
 	return $mappedSegments;
 }
-
-// get number range from input
-$range = getRange($input);
 
 $blocks = explode("\n\n", $input);
 

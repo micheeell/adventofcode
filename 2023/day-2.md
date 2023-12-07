@@ -1,7 +1,7 @@
 ## Day 2: Cube Conundrum
 
 * [Problem - Part 1](#part-1)
-* [Problem - Part 2](#part-two)
+* [Problem - Part 2](#part----two----)
 * [Instructions](#instructions)
 * [See Also](#see-also)
 
