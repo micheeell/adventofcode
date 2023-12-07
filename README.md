@@ -13,10 +13,14 @@ Please refer to the last commit date.
     * [Day 2](2023/day-2.md)
     * [Day 3](2023/day-3.md)
     * [Day 4](2023/day-4.md)
+    * [Day 5 - PHP](2023/day-5.part2.php)
+    * [Day 6 - PHP](2023/day-6.part2.php)
+    * [Day 7 - PHP](2023/day-7.part2.php)
 
 ## Links:
 
 * [official site](https://adventofcode.com/)
+* [Markdown Guide](https://github.com/fefong/markdown_readme)
 
 ## @Todo
 
