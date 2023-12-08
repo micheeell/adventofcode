@@ -120,9 +120,9 @@ function isFourOfAKind($cards): bool
 	$kinds = [];
 	foreach ($cards as $card) {
 		if (!isset($kinds[$card])) {
-			// first card of this kind
+			// case 1) first card of this kind
 			if ($card == CARD_JOKER) {
-				// first joker. increment all other cards by one
+				// case 1-a) first joker. increment all other cards by one
 				foreach ($kinds as $_card => $_repeats) {
 					$kinds[$_card]++;
 					if ($kinds[$_card] > 3) {
@@ -135,7 +135,7 @@ function isFourOfAKind($cards): bool
 				continue;
 			}
 
-			// not a joker
+			// case 1-b) not a joker
 			$kinds[$card] = 1 + ($kinds[CARD_JOKER] ?? 0);
 			if ($kinds[$card] > 3) {
 				// found 4 of a kind!
@@ -145,9 +145,9 @@ function isFourOfAKind($cards): bool
 			continue;
 		}
 
-		// not the first card of its type
+		// case 2) not the first card of its type
 		if ($card == CARD_JOKER) {
-			// another joker. increment all other cards by one (including joker)
+			// case 2-a) another joker. increment all other cards by one (including joker)
 			foreach ($kinds as $_card => $_repeats) {
 				$kinds[$_card]++;
 				if ($kinds[$_card] > 3) {
@@ -159,7 +159,7 @@ function isFourOfAKind($cards): bool
 			continue;
 		}
 
-		// not a joker
+		// case 2-b) not a joker
 		$kinds[$card]++;
 		if ($kinds[$card] > 3) {
 			// found 4 of a kind!
@@ -189,7 +189,8 @@ function isFullHouse($cards): bool
 		}
 	}
 
-	// this includes "5 of a kind" & "4 of a kind" cases, but they should be handled before:
+	// NOTE: this condition includes cases of "5 of a kind" & "4 of a kind" cases,
+	// but they should be handled before:
 	return count($kinds) < 3;
 }
 
@@ -198,9 +199,9 @@ function isThreeOfAKind($cards): bool
 	$kinds = [];
 	foreach ($cards as $card) {
 		if (!isset($kinds[$card])) {
-			// first card of this kind
+			// case 1) first card of this kind
 			if ($card == CARD_JOKER) {
-				// first joker. increment all other cards by one
+				// case 1-a) first joker. increment all other cards by one
 				foreach ($kinds as $_card => $_repeats) {
 					$kinds[$_card]++;
 					if ($kinds[$_card] > 2) {
@@ -212,7 +213,7 @@ function isThreeOfAKind($cards): bool
 				continue;
 			}
 
-			// not a joker
+			// case 1-b) not a joker
 			$kinds[$card] = 1 + ($kinds[CARD_JOKER] ?? 0);
 			if ($kinds[$card] > 2) {
 				// found 3 of a kind!
@@ -222,13 +223,13 @@ function isThreeOfAKind($cards): bool
 			continue;
 		}
 
-		// not the first card of its kind
+		// case 2) not the first card of its kind
 		if ($card == CARD_JOKER) {
-			// another joker. 2 jokers ensure that there will AT LEAST be a "3 of a kind"
+			// case 2-a) another joker. 2 jokers ensure that there will AT LEAST be a "3 of a kind"
 			return true;
 		}
 
-		// not a joker
+		// case 2-b) not a joker
 		$kinds[$card]++;
 		if ($kinds[$card] > 2) {
 			// found 3 of a kind!
@@ -245,28 +246,30 @@ function isTwoPair($cards): bool
 	$firstPair = false;
 	foreach ($cards as $card) {
 		if ($card == CARD_JOKER) {
+			// case 1) joker card
 			if ($firstPair) {
 				// if there was already a pair, then a joker can be associated to any other single card to make a new pair
 				return true;
 			}
 
+			// a joker associated to any card makes a pair
 			$firstPair = true;
 			continue;
 		}
 
 		if (!in_array($card, $kinds)) {
-			// new kind of card: add it
+			// case 2) new kind of card: add it
 			$kinds[] = $card;
 			continue;
 		}
 
-		// card type was already included!
+		// case 3) card type was already included!
 		if ($firstPair) {
-			// if it's not the first time, then it's a new pair:
+			// case 3-a) if it's not the first time, then it's a new pair:
 			return true;
 		}
 
-		// now there will be a pair. keep looking (for the 2nd pair)
+		// case 3-b) now there will be a pair. keep looking (for the 2nd pair)
 		$firstPair = true;
 	}
 
@@ -344,6 +347,7 @@ function parseHand($line): false|array
 
 		return false;
 	}
+
 	$cards = str_split($matches[1]);
 	$bid = (int)$matches[2];
 

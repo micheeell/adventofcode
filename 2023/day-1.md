@@ -1,58 +1,13 @@
 ## Day 1: Trebuchet?!
 
-* [Problem - Part 1](#----part-1----)
-* [Problem - Part 2](#----part-two----)
-* [Instructions](#instructions)
-* [See Also](#see-also)
+> DISCLAIMER: Due to [copyright considerations](https://adventofcode.com/2023/about#faq_copying), I will stop
+> reproducing puzzle text in this repository.
+> Please refer to the original page for more information.
 
 *[link to Day 1: Trebuchet?!](https://adventofcode.com/2023/day/1)*
 
-### --- Part 1 ---
-
-Something is wrong with global snow production, and you've been selected to take a look. The Elves have even given you a map; on it, they've used stars to mark the top fifty locations that are likely to be having problems.
-
-You've been doing this long enough to know that to restore snow operations, you need to check all _fifty stars_ by December 25th.
-
-Collect stars by solving puzzles. Two puzzles will be made available on each day in the Advent calendar; the second puzzle is unlocked when you complete the first. Each puzzle grants _one star_. Good luck!
-
-You try to ask why they can't just use a [weather machine](https://adventofcode.com/2015/day/1) ("not powerful enough") and where they're even sending you ("the sky") and why your map looks mostly blank ("you sure ask a lot of questions") and hang on did you just say the sky ("of course, where do you think snow comes from") when you realize that the Elves are already loading you into a [trebuchet](https://en.wikipedia.org/wiki/Trebuchet) ("please hold still, we need to strap you in").
-
-As they're making the final adjustments, they discover that their calibration document (your puzzle input) has been **amended** by a very young Elf who was apparently just excited to show off her art skills. Consequently, the Elves are having trouble reading the values on the document.
-
-The newly-improved calibration document consists of lines of text; each line originally contained a specific **calibration value** that the Elves now need to recover. On each line, the calibration value can be found by combining the **first digit** and the **last digit** (in that order) to form a single **two-digit number**.
-
-For example:
-```
-1abc2
-pqr3stu8vwx
-a1b2c3d4e5f
-treb7uchet
-```
-
-In this example, the calibration values of these four lines are `12`, `38`, `15`, and `77`. Adding these together produces `142`.
-
-Consider your entire calibration document. What is the sum of all of the calibration values?
-
-To begin, [get your puzzle input](https://adventofcode.com/2023/day/1/input).
-
-### --- Part Two ---
-
-Your calculation isn't quite right. It looks like some of the digits are actually spelled out with letters: one, two, three, four, five, six, seven, eight, and nine also count as valid "digits".
-
-Equipped with this new information, you now need to find the real first and last digit on each line. For example:
-```
-two1nine
-eightwothree
-abcone2threexyz
-xtwone3four
-4nineeightseven2
-zoneight234
-7pqrstsixteen
-```
-
-In this example, the calibration values are `29`, `83`, `13`, `24`, `42`, `14`, and `76`. Adding these together produces `281`.
-
-What is the sum of all of the calibration values?
+* [Instructions](#instructions)
+* [See Also](#see-also)
 
 ### Instructions
 
@@ -66,6 +21,10 @@ What is the sum of all of the calibration values?
 ### See also
 
 Related topics:
+
+* [Day 1: Trebuchet?!](https://adventofcode.com/2023/day/1)
+* [weather machine](https://adventofcode.com/2015/day/1)
+* [trebuchet](https://en.wikipedia.org/wiki/Trebuchet)
 * [PHP from the command line](https://www.php.net/manual/en/features.commandline.php)
 * [Regex crossword](https://regexcrossword.com/)
 * [Markdown Guide](https://www.markdownguide.org/cheat-sheet/)

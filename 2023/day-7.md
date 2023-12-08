@@ -1,10 +1,10 @@
-## Day <X>:
+## Day 7: Camel Cards
 
 > DISCLAIMER: Due to [copyright considerations](https://adventofcode.com/2023/about#faq_copying), I will stop
 > reproducing puzzle text in this repository.
 > Please refer to the original page for more information.
 
-*[link to Day <X>](https://adventofcode.com/2023/day/<X>)*
+*[link to Day 7: Camel Cards](https://adventofcode.com/2023/day/7)*
 
 * [Instructions](#instructions)
 * [Related topics](#links)
@@ -18,5 +18,9 @@
 
 ### Links
 
-* [Markdown Guide](https://github.com/fefong/markdown_readme)
-* [PHP from the command line](https://www.php.net/manual/en/features.commandline.php)
+* [Day 7: Camel Cards](https://adventofcode.com/2023/day/7)
+* [Airship](https://en.wikipedia.org/wiki/Airship)
+* [Camel](https://en.wikipedia.org/wiki/Dromedary)
+* [Jokers](https://en.wikipedia.org/wiki/Joker_(playing_card))
+* [Poker](https://en.wikipedia.org/wiki/List_of_poker_hands)
+* [`usort()`](https://www.php.net/manual/function.usort.php)

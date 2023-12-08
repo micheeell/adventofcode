@@ -8,8 +8,8 @@ Time:      7  15   30
 Distance:  9  40  200
 STR
 	: <<<STR
-Time:        48     93     85     95
-Distance:   296   1928   1236   1391
+Time:      7  15   31
+Distance:  9  40  201
 STR;
 
 // remove leading and trailing spaces or blank lines
