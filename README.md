@@ -16,7 +16,7 @@ Please refer to the last commit date.
     * [Day 5](2023/day-5.md)
     * [Day 6](2023/day-6.md)
     * [Day 7](2023/day-7.md)
-    * [Day 7](2023/day-7.md)
+    * [Day 8](2023/day-8.md)
 
 ## Links:
 

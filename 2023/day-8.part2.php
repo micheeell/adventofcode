@@ -1,5 +1,40 @@
 <?php
 
+/**
+ * GPT solution
+ *
+ * function chineseRemainderTheorem($remainders, $moduli)
+ * {
+ * $n = count($moduli);
+ * $x = gmp_init('0');
+ * $N = gmp_init('1');
+ *
+ * // Calculate N
+ * foreach ($moduli as $m) {
+ * $N = gmp_mul($N, $m);
+ * }
+ *
+ * // Calculate x
+ * for ($i = 0; $i < $n; $i++) {
+ * $Ni = gmp_div($N, $moduli[$i]);
+ * $xi = gmp_invert($Ni, $moduli[$i]);
+ * $term = gmp_mul(gmp_mul($remainders[$i], $Ni), $xi);
+ * $x = gmp_add($x, $term);
+ * }
+ *
+ * return gmp_strval(gmp_mod($x, $N));
+ * }
+ *
+ * // Example usage:
+ * $initialOccurrences = ['11567', '21251', '12643', '16409', '19099', '14257'];
+ * $periods = ['11569', '21253', '12645', '16413', '19101', '14259'];
+ *
+ * $firstSimultaneousOccurrence = chineseRemainderTheorem($initialOccurrences, $periods);
+ *
+ * echo "The first simultaneous occurrence is at step: " . $firstSimultaneousOccurrence . "\n";
+ * exit(1);
+ * end of GPT solution
+ */
 include __DIR__ . DIRECTORY_SEPARATOR . 'template_start.php';
 
 $input = TEST_MODE
@@ -72,12 +107,17 @@ function getEndingPoints($network): array
 {
 	$points = [];
 	foreach (array_keys($network) as $position) {
-		if (str_ends_with($position, 'Z')) {
+		if (isExit($position)) {
 			$points[] = $position;
 		}
 	}
 
 	return $points;
+}
+
+function isExit($position): bool
+{
+	return str_ends_with($position, 'Z');
 }
 
 function parseNetwork($lines): false|array
@@ -110,25 +150,59 @@ function parseNetwork($lines): false|array
 	return $network;
 }
 
-function ghostWalk($coordinates, $direction, $network): array
+function checkLoopExit($exit, $instructions, $network, $period): bool
 {
-	$nextCoordinates = [];
-	foreach ($coordinates as $_k => $position) {
-		$nextCoordinates[$_k] = walk($position, $direction, $network);
+	if ($period % count($instructions) != 0) {
+		// cannot be a loop if number of steps is not a multiple of the number of instructions
+		return false;
 	}
 
-	return $nextCoordinates;
+	if (!isExit($exit)) {
+		return false;
+	}
+
+	$position = $exit;
+	for ($i = 0; $i < $period; $i++) {
+		$position = walk($position, $instructions[$i % count($instructions)], $network);
+	}
+
+	// it's a loop if it exits on the same exit point.
+	return ($position == $exit);
 }
 
-function hasArrived($coordinates): bool
+function computeExits($position, $instructions, $network): false|int
 {
-	foreach ($coordinates as $position) {
-		if (!str_ends_with($position, 'Z')) {
-			return false;
+	$length = count($instructions);
+	$visited = [];
+	$step = 0;
+	$coordinate = $position;
+	while (true) {
+		$reducedStep = $step % $length;
+		$visited[] = $coordinate . '|' . $reducedStep;
+		$direction = $instructions[$reducedStep];
+		$coordinate = walk($coordinate, $direction, $network);
+		$step++;
+
+		if (isExit($coordinate)) {
+			if (VERBOSE && DEBUG_MODE) {
+				echo $position . ' exits on ' . $coordinate . ' after ' . $step . ' steps.' . PHP_EOL;
+			}
+
+			// check the exit loops with the same number of steps (sufficient condition)
+			return checkLoopExit($coordinate, $instructions, $network, $step) ? $step : false;
+		}
+		$visitedKey = $coordinate . '|' . ($step % $length);
+		if (in_array($visitedKey, $visited)) {
+			if (VERBOSE && DEBUG_MODE) {
+				echo $step . ' > Coordinate is repeated: [' . $visitedKey . '].' . PHP_EOL;
+				echo 'EXITING LOOP' . PHP_EOL;
+			}
+
+			break;
 		}
 	}
 
-	return true;
+	return false;
 }
 
 function walk($coordinate, $direction, $network): string
@@ -138,61 +212,39 @@ function walk($coordinate, $direction, $network): string
 
 [$instructions, $network] = parseInput($input);
 $length = count($instructions);
-$separator = '|';
 $loop = $found = false;
 $steps = 0;
 $visited = [];
-$coordinates = getStartingPoints($network);
+$startingPoints = getStartingPoints($network);
 if (VERBOSE) {
-	echo 'Found ' . count($coordinates) . ' starting points.' . PHP_EOL;
-	echo 'For ' . count(getEndingPoints($network)) . ' ending points.' . PHP_EOL;
+	echo 'Found ' . count($startingPoints) . ' starting points.' . PHP_EOL;
 	if (DEBUG_MODE) {
+		echo '..and ' . count(getEndingPoints($network)) . ' ending points.' . PHP_EOL;
+		echo 'Instructions are looping on ' . $length . ' directions.' . PHP_EOL;
 		echo 'initial position is: (' . PHP_EOL
-			. "\t" . implode(",\n\t", $coordinates)
+			. "\t" . implode(",\n\t", $startingPoints)
 			. PHP_EOL . ')' . PHP_EOL;
 	}
 }
-while (!$loop && !$found) {
-	$reducedStep = $steps % $length;
-	$visited[] = implode($separator, $coordinates) . $separator . $reducedStep;
-	$direction = $instructions[$reducedStep];
-	$coordinates = ghostWalk($coordinates, $direction, $network);
-	$steps++;
-	if (VERBOSE && DEBUG_MODE && ($steps % 100 == 0)) {
-		echo 'after 100 steps position is: (' . PHP_EOL
-			. "\t" . implode(",\n\t", $coordinates)
-			. PHP_EOL . ')' . PHP_EOL;
-	}
-	if (VERBOSE && DEBUG_MODE && $steps > 999) {
-		$found = true; // that's a lie
-	}
-	if (hasArrived($coordinates)) {
-		if (VERBOSE) {
-			echo 'Made it out of the maze on the ' . $direction . '!' . PHP_EOL;
+$answer = 1;
+foreach ($startingPoints as $startingPoint) {
+	if ($steps = computeExits($startingPoint, $instructions, $network)) {
+		$answer = gmp_lcm($answer, $steps);
+	} else {
+		if (!SILENT) {
+			echo 'Starting point ' . $startingPoint . ' never exits "correctly"... Is this a bug???' . PHP_EOL;
 		}
 
-		$found = true;
-	}
-
-	$isVisited = in_array(implode($separator, $coordinates) . $separator . ($steps % $length), $visited);
-	if ($isVisited) {
-		if (VERBOSE) {
-			echo 'Caught in a loop :-(' . PHP_EOL;
-		}
-
-		$loop = true;
+		$answer = 0;
+		break;
 	}
 }
 
 
 if (SILENT) {
-	echo $steps . PHP_EOL;
+	echo $answer . PHP_EOL;
 } else {
-	if ($found) {
-		echo 'Steps required to reach exit: ' . $steps . PHP_EOL;
-	} else {
-		echo 'After ' . $steps . ' steps, got in a loop.' . PHP_EOL;
-	}
+	echo 'Sand storm is exited after ' . $answer . ' steps.' . PHP_EOL;
 }
 
 

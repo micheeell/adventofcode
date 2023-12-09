@@ -11,10 +11,11 @@
 
 ### Instructions
 
-1. Download [your puzzle input](https://adventofcode.com/2023/day/8/input) and save it as `day-8.txt` in this
+1. Install the PHP [`gmp` library](https://www.php.net/manual/en/book.gmp.php).
+2. Download [your puzzle input](https://adventofcode.com/2023/day/8/input) and save it as `day-8.txt` in this
    folder.
-2. run `php -f day-8.part1.php -- -v -t` to check sample data is processed correctly
-3. run `php -f day-8.part2.php` to get the answer based on your input
+3. run `php -f day-8.part1.php -- -v -t` to check sample data is processed correctly
+4. run `php -f day-8.part2.php` to get the answer based on your input
 
 ### Links
 
