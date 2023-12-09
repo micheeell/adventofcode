@@ -23,9 +23,7 @@
 Related topics:
 
 * [Day 1: Trebuchet?!](https://adventofcode.com/2023/day/1)
-* [weather machine](https://adventofcode.com/2015/day/1)
-* [trebuchet](https://en.wikipedia.org/wiki/Trebuchet)
-* [PHP from the command line](https://www.php.net/manual/en/features.commandline.php)
+* [Weather Machine](https://adventofcode.com/2015/day/1)
+* [Trebuchet](https://en.wikipedia.org/wiki/Trebuchet)
 * [Regex crossword](https://regexcrossword.com/)
-* [Markdown Guide](https://www.markdownguide.org/cheat-sheet/)
-* [Trebuchet in xkcd](https://xkcd.com/382/)
+* [XKCD - Trebuchet](https://xkcd.com/382/)

@@ -21,8 +21,6 @@
 Related topics:
 
 * [Day 3: Gear Ratios](https://adventofcode.com/2023/day/3)
-* [gondola lift](https://en.wikipedia.org/wiki/Gondola_lift)
+* [Gondola Lift](https://en.wikipedia.org/wiki/Gondola_lift)
 * [`preg_match_all`](https://www.php.net/manual/en/function.preg-match-all.php)
 * [XKCD - Regular Expressions](https://xkcd.com/208/)
-* [Markdown Guide](https://www.markdownguide.org/cheat-sheet/)
-* [PHP from the command line](https://www.php.net/manual/en/features.commandline.php)

@@ -1,4 +1,4 @@
-## Day 8:
+## Day 8: Haunted Wasteland
 
 > DISCLAIMER: Due to [copyright considerations](https://adventofcode.com/2023/about#faq_copying), I will stop
 > reproducing puzzle text in this repository.
