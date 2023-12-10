@@ -13,10 +13,11 @@
 
 1. Download [your puzzle input](https://adventofcode.com/2023/day/9/input) and save it as `day-9.txt` in this
    folder.
-2. Run `php -f day-9.php -- -v -t` to check sample data is processed correctly
-3. Run `php -f day-9.php --` to get the answer based on your input for part2
-4. You can do the same for part 2 with `--part2` / `-2` parameter: `php -f day-9.php -- -2` will provide with answer for
-   part2.
+2. Run `php -f day-9.php -- -v -t` to check sample data is processed correctly.
+3. Run `php -f day-9.php --` to get the answer based on your input.
+4. You can do the same for part 2 with `--part2` / `-2` parameter:
+    + `php -f day-9.php -- -2` will provide with answer for
+      part2.
 
 ### Links
 

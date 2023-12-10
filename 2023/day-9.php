@@ -32,7 +32,6 @@ function parseInput($input): array
 	return $numbers;
 }
 
-
 function predict($series): int
 {
 	if (isReduced($series)) {
@@ -83,19 +82,24 @@ function reduce($numbers): array
 	return $reduced;
 }
 
-
 $lines = parseInput($input);
 $sum = 0;
-foreach ($lines as $line) {
-	$sum += predict($line);
-}
+foreach ($lines as $_k => $line) {
+	$prediction = predict($line);
+	if (TEST_MODE && VERBOSE) {
+		echo 'Prediction for line #' . ($_k + 1) . ' is ' . $prediction . PHP_EOL;
+	}
 
+	$sum += $prediction;
+	if (VERBOSE && DEBUG_MODE) {
+		echo 'Partial sum is ' . $sum . PHP_EOL;
+	}
+}
 
 if (SILENT) {
 	echo $sum . PHP_EOL;
 } else {
 	echo (PART2 ? 'Part 2: ' : 'Part 1: ') . 'The sum for all extrapolated values is ' . $sum . PHP_EOL;
 }
-
 
 include __DIR__ . DIRECTORY_SEPARATOR . 'template_exit.php';
