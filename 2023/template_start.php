@@ -24,8 +24,8 @@ function displayHelp()
 }
 
 // Script options
-$shortOptions = "vfitshd";
-$longOptions = ["verbose", "file", "input", "test", "silent", "help", "debug"];
+$shortOptions = "vfitshd2";
+$longOptions = ["verbose", "file", "input", "test", "silent", "help", "debug", "part2"];
 
 $options = getopt($shortOptions, $longOptions);
 
@@ -39,6 +39,7 @@ define('TEST_MODE', (isset($options["t"]) || isset($options["test"])));
 define('SILENT', (isset($options["s"]) || isset($options["silent"])));
 // $debug = $options["d"] ?? ($options["debug"] ?? false);
 define('DEBUG_MODE', (isset($options["d"]) || isset($options["debug"])));
+define('PART2', (isset($options["2"]) || isset($options["part2"])));
 
 if (VERBOSE) {
 	echo 'starting...'
