@@ -4,6 +4,11 @@
 # But not the following files
 !.gitignore
 !README.md
+!2024/
+!2024/day-1.md
+!2024/day-1.php
+!2024/template_exit.php
+!2024/template_start.php
 !2023/
 !2023/template_start.php
 !2023/template_exit.php

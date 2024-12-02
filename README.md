@@ -8,6 +8,9 @@ Please refer to the last commit date.
 
 ### Puzzles
 
+* 2024
+    * [Day 1](2024/day-1.md)
+
 * 2023
     * [Day 1](2023/day-1.md)
     * [Day 2](2023/day-2.md)
