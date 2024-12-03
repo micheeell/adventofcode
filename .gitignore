@@ -5,8 +5,8 @@
 !.gitignore
 !README.md
 !2024/
-!2024/day-1.md
-!2024/day-1.php
+!2024/day-*.md
+!2024/day-*.php
 !2024/template_exit.php
 !2024/template_start.php
 !2023/
